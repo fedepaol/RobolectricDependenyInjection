@@ -12,9 +12,7 @@ public class RobolectricApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        mComponent = DaggerRoboSampleComponent.builder()
-                .applicationModule(getApplicationModule())
-                .build();
+        initComponent();
     }
 
     ApplicationModule getApplicationModule() {
@@ -23,5 +21,11 @@ public class RobolectricApplication extends Application {
 
     public RoboSampleComponent getComponent() {
         return mComponent;
+    }
+
+    void initComponent() {
+        mComponent = DaggerRoboSampleComponent.builder()
+                .applicationModule(getApplicationModule())
+                .build();
     }
 }

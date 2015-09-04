@@ -41,7 +41,7 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    GitHubClient provideWeatherClient() {
+    GitHubClient provideClient() {
         return new GitHubClient(mApp.getApplicationContext());
     }
 

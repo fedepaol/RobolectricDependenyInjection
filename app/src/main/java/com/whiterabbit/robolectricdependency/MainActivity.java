@@ -78,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-
+                // Do something smart.
+                // Or run!
             }
         });
     }
