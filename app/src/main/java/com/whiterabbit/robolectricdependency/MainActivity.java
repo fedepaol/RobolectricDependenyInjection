@@ -18,25 +18,22 @@
 
 package com.whiterabbit.robolectricdependency;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.whiterabbit.robolectricdependency.client.GitHubClient;
 import com.whiterabbit.robolectricdependency.client.Repo;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     @Inject
@@ -65,8 +62,7 @@ public class MainActivity extends AppCompatActivity {
         Call<List<Repo>> call = mClient.getRepos("fedepaol");
         call.enqueue(new Callback<List<Repo>>() {
 
-            @Override
-            public void onResponse(Response<List<Repo>> response) {
+            @Override public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
                 List<Repo> result = response.body();
                 if (result.size() > 0) {
                     mFirstRepo.setText(response.body().get(0).getName());
@@ -76,8 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            @Override
-            public void onFailure(Throwable t) {
+            @Override public void onFailure(Call<List<Repo>> call, Throwable t) {
                 // Do something smart.
                 // Or run!
             }
