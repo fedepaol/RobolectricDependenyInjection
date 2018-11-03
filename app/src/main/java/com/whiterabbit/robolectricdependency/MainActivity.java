@@ -18,21 +18,18 @@
 
 package com.whiterabbit.robolectricdependency;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.whiterabbit.robolectricdependency.client.GitHubClient;
 import com.whiterabbit.robolectricdependency.client.Repo;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit.Call;
 import retrofit.Callback;
@@ -42,10 +39,10 @@ public class MainActivity extends AppCompatActivity {
     @Inject
     GitHubClient mClient;
 
-    @Bind(R.id.first_repo)
+    @BindView(R.id.first_repo)
     TextView mFirstRepo;
 
-    @Bind(R.id.second_repo)
+    @BindView(R.id.second_repo)
     TextView mSecondRepo;
 
 

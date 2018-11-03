@@ -29,23 +29,22 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricGradleTestRunner;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.Assert.assertEquals;
-import static org.robolectric.Shadows.shadowOf;
+import androidx.test.core.app.ApplicationProvider;
 
-@RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class,
-        application = TestRobolectricApplication.class)
+import static org.junit.Assert.assertEquals;
+
+@RunWith(RobolectricTestRunner.class)
+@Config(application = TestRobolectricApplication.class)
 public class TwoReposTest {
     @Before
     public void setup() {
-        TestRobolectricApplication app = (TestRobolectricApplication) RuntimeEnvironment.application;
+        TestRobolectricApplication app = (TestRobolectricApplication) ApplicationProvider.getApplicationContext();
         MockApplicationModule module = new MockApplicationModule(app);
         Repo r1 = new Repo("RocketOnTheMoon", "Rocket", "COBOL");
         Repo r2 = new Repo("Embarassing project", "Embarassing", "Logo");
@@ -61,8 +60,8 @@ public class TwoReposTest {
     @Test
     public void oneRepoReturned() {
         Activity activity = Robolectric.buildActivity(MainActivity.class).create().get();
-        TextView firstRepo = (TextView) shadowOf(activity).findViewById(R.id.first_repo);
-        TextView secondRepo = (TextView) shadowOf(activity).findViewById(R.id.second_repo);
+        TextView firstRepo = activity.findViewById(R.id.first_repo);
+        TextView secondRepo = activity.findViewById(R.id.second_repo);
         assertEquals("Only one repo", firstRepo.getText(), "RocketOnTheMoon");
         assertEquals(secondRepo.getText(), "Embarassing project");
     }
